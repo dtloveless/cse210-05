@@ -67,6 +67,8 @@ class Program
 
             using (StreamReader reader = new StreamReader(filename))
             {
+                journal._entries = [];
+                
                 while (!reader.EndOfStream)
                 {
                     Entry entry = new();
