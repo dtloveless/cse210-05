@@ -2,7 +2,6 @@ public class Journal()
 {
     public List<Entry> _entries = new();
     public List<string> _prompts = [
-
         "What am I most proud of having accomplished today?",
         "If I had one thing I could do over today, what would it be?",
         "What was the strongest emotion I felt today?",
