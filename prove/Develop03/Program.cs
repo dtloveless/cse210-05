@@ -8,7 +8,7 @@ class Program
         
         Console.Clear();
         Console.WriteLine("Welcome to the Scripture Memorizer!");
-        Console.Write("Please type a standard scripture reference to begin (\"Proverbs 1:3-6\"): ");
+        Console.Write("Please type a standard scripture reference to begin (\"Proverbs 3:5-6\"): ");
         
         string referenceText = Console.ReadLine();
         Reference reference = new(referenceText);
@@ -20,7 +20,7 @@ class Program
         
         JsonNode scriptures = JsonNode.Parse(File.ReadAllText("scriptures.json"));
 
-        string scriptureText;
+        string scriptureText = "";
 
         if (endVerse == null)
         {
@@ -28,7 +28,12 @@ class Program
         }
         else
         {
-            scriptureText = "This is hard.";
+            int numVerses = int.Parse(endVerse) - int.Parse(verse) + 1;
+            
+            for (int i = 0; i < numVerses; i++)
+            {
+                scriptureText += scriptures[book][chapter][$"{int.Parse(verse) + i}"].ToString() + " ";
+            }
         }
 
         Scripture scripture = new(reference, scriptureText);
@@ -40,7 +45,14 @@ class Program
         {
             Console.WriteLine();
             Console.Write("Press enter to continue. ");
-            Console.ReadLine();
+            string userInput = Console.ReadLine();
+
+            if(userInput.ToLower() == "quit")
+            {
+                Console.Clear();
+                Console.WriteLine("Thank you for using the Scripture Memorizer!");
+                break;
+            }
 
             if (!scripture.GetIsCompletelyHidden())
             {
