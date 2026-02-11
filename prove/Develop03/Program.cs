@@ -5,7 +5,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        
+        /* Program Start Behavior */
+
+        // Gets scripture reference from user and creates reference object
         Console.Clear();
         Console.WriteLine("Welcome to the Scripture Memorizer!");
         Console.Write("Please type a standard scripture reference to begin (\"Proverbs 3:5-6\"): ");
@@ -18,6 +20,7 @@ class Program
         string verse = reference.GetVerse();
         string endVerse = reference.GetEndVerse();
         
+        // Fetches the text of the corresponding verses from JSON file
         JsonNode scriptures = JsonNode.Parse(File.ReadAllText("scriptures.json"));
 
         string scriptureText = "";
@@ -36,7 +39,11 @@ class Program
             }
         }
 
+        // Creates scripture object
         Scripture scripture = new(reference, scriptureText);
+
+
+        /* Program Run Behavior */
 
         Console.Clear();
         Console.WriteLine(scripture.GetRenderedText());
@@ -44,29 +51,29 @@ class Program
         while (true)
         {
             Console.WriteLine();
-            Console.Write("Press enter to continue. ");
+            Console.Write("Press enter to hide words, type 'show' to reveal words, or type 'quit' to end. ");
             string userInput = Console.ReadLine();
 
-            if(userInput.ToLower() == "quit")
+            if(userInput.ToLower() == "quit" || scripture.GetIsCompletelyHidden())
             {
                 Console.Clear();
                 Console.WriteLine("Thank you for using the Scripture Memorizer!");
                 break;
             }
-
-            if (!scripture.GetIsCompletelyHidden())
+            else if (userInput.ToLower() == "show")
             {
-                scripture.HideWords();
+                scripture.ShowWords();
 
                 Console.Clear();
                 Console.WriteLine(scripture.GetRenderedText());
             }
             else
             {
+                scripture.HideWords();
+
                 Console.Clear();
-                Console.WriteLine("Thank you for using the Scripture Memorizer!");
-                break;
-            }   
+                Console.WriteLine(scripture.GetRenderedText());
+            }
         }
     }
 }

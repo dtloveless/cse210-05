@@ -2,7 +2,7 @@ public class Scripture
 {
     private Reference _reference;
     private List<Word> _words = [];
-    private int _numHidden;
+    private List<int> _hiddenWords = [];
     private bool _isCompletelyHidden;
 
     public Scripture(Reference reference, string text)
@@ -16,7 +16,6 @@ public class Scripture
             _words.Add(newWord);
         }
 
-        _numHidden = 0;
         _isCompletelyHidden = false;
     }
 
@@ -25,21 +24,31 @@ public class Scripture
         for (int i = 0; i < numToHide; i++)
         {
             Random rand = new();
-            while (_numHidden < _words.Count)
+            while (_hiddenWords.Count < _words.Count)
             {
                 int index = rand.Next(_words.Count);
                 if(!_words[index].GetIsHidden())
                 {
                     _words[index].Hide();
-                    _numHidden += 1;
+                    _hiddenWords.Add(index);
                     break;
                 }
             }
-            if (_numHidden >= _words.Count)
+            if (_hiddenWords.Count >= _words.Count)
             {
                 _isCompletelyHidden = true;
                 break;
             }
+        }
+    }
+
+    public void ShowWords(int numToShow = 3)
+    {
+        for (int i = 0; i < numToShow; i++)
+        {
+            int index = _hiddenWords[_hiddenWords.Count - 1];
+            _words[index].Show();
+            _hiddenWords.RemoveAt(_hiddenWords.Count - 1);
         }
     }
 

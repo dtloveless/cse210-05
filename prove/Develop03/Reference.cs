@@ -5,6 +5,14 @@ public class Reference
     private string _verse;
     private string _endVerse;
 
+    public Reference(string book, string chapter, string verse, string endVerse = null)
+    {
+        _book = book;
+        _chapter = chapter;
+        _verse = verse;
+        _endVerse = endVerse;
+    }
+
     public Reference(string referenceText)
     {
         string[] parts = referenceText.Split(':');
@@ -27,23 +35,15 @@ public class Reference
         }
     }
 
-    public Reference(string book, string chapter, string verse, string endVerse = null)
-    {
-        _book = book;
-        _chapter = chapter;
-        _verse = verse;
-        _endVerse = endVerse;
-    }
-
     public string GetRenderedText()
     {
-        if (_endVerse != null)
+        if (_endVerse == null)
         {
-            return $"{_book} {_chapter}:{_verse}-{_endVerse}";
+            return $"{_book} {_chapter}:{_verse}";
         }
         else
         {
-            return $"{_book} {_chapter}:{_verse}";
+            return $"{_book} {_chapter}:{_verse}-{_endVerse}";
         }
     }
 
