@@ -7,7 +7,8 @@
 * words several at a time for the user to recite until the scripture is completely
 * hidden and hopefully fully memorized. I exceeded the minimum requirements by
 * allowing the user to simply provide any scripture reference and have the text of
-* those verses automatically populate.
+* those verses automatically populate. Users can also unhide words that were 
+* previously hidden.
 * 
 * Credit to Ben Crowder who wrote a JSON file containing the entire Standard Works 
 * of The Church of Jesus Christ of Latter-day Saints.
