@@ -1,3 +1,19 @@
+/***********************************************************************************
+* Scripture Memorizer
+* by Daniel Loveless
+* for CSE 210-05 @ BYU-Idaho Winter 2026
+*
+* This program assists the user in memorizing a specified scripture by hiding 
+* words several at a time for the user to recite until the scripture is completely
+* hidden and hopefully fully memorized. I exceeded the minimum requirements by
+* allowing the user to simply provide any scripture reference and have the text of
+* those verses automatically populate.
+* 
+* Credit to Ben Crowder who wrote a JSON file containing the entire Standard Works 
+* of The Church of Jesus Christ of Latter-day Saints.
+* https://github.com/bcbooks/scriptures-json
+***********************************************************************************/
+
 using System;
 using System.Text.Json.Nodes;
 
