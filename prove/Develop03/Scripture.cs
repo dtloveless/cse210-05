@@ -46,9 +46,12 @@ public class Scripture
     {
         for (int i = 0; i < numToShow; i++)
         {
-            int index = _hiddenWords[_hiddenWords.Count - 1];
-            _words[index].Show();
-            _hiddenWords.RemoveAt(_hiddenWords.Count - 1);
+            if (_hiddenWords.Count > 0)
+            {
+                int index = _hiddenWords[_hiddenWords.Count - 1];
+                _words[index].Show();
+                _hiddenWords.RemoveAt(_hiddenWords.Count - 1);
+            }
         }
     }
 

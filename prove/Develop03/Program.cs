@@ -24,34 +24,49 @@ class Program
         /* Program Start Behavior */
 
         // Gets scripture reference from user and creates reference object
-        Console.Clear();
-        Console.WriteLine("Welcome to the Scripture Memorizer!");
-        Console.Write("Please type a standard scripture reference to begin (\"Proverbs 3:5-6\"): ");
-        
-        string referenceText = Console.ReadLine();
-        Reference reference = new(referenceText);
-
-        string book = reference.GetBook();
-        string chapter = reference.GetChapter();
-        string verse = reference.GetVerse();
-        string endVerse = reference.GetEndVerse();
-        
-        // Fetches the text of the corresponding verses from JSON file
-        JsonNode scriptures = JsonNode.Parse(File.ReadAllText("scriptures.json"));
-
+        Reference reference;
         string scriptureText = "";
 
-        if (endVerse == null)
+        while (true)
         {
-            scriptureText = scriptures[book][chapter][verse].ToString();
-        }
-        else
-        {
-            int numVerses = int.Parse(endVerse) - int.Parse(verse) + 1;
+            Console.Clear();
+            Console.WriteLine("Welcome to the Scripture Memorizer!");
+            Console.Write("Please type a standard scripture reference to begin (\"Proverbs 3:5-6\"): ");
+
+            string referenceText = Console.ReadLine();
             
-            for (int i = 0; i < numVerses; i++)
+            try
             {
-                scriptureText += scriptures[book][chapter][$"{int.Parse(verse) + i}"].ToString() + " ";
+                reference = new Reference(referenceText);
+
+                string book = reference.GetBook();
+                string chapter = reference.GetChapter();
+                string verse = reference.GetVerse();
+                string endVerse = reference.GetEndVerse();
+                
+
+                // Fetches the text of the corresponding verses from JSON file
+                JsonNode scriptures = JsonNode.Parse(File.ReadAllText("scriptures.json"));
+
+                if (endVerse == null)
+                {
+                    scriptureText = scriptures[book][chapter][verse].ToString();
+                }
+                else
+                {
+                    int numVerses = int.Parse(endVerse) - int.Parse(verse) + 1;
+                    
+                    for (int i = 0; i < numVerses; i++)
+                    {
+                        scriptureText += scriptures[book][chapter][$"{int.Parse(verse) + i}"].ToString() + " ";
+                    }
+                }
+                break;
+            }
+            catch
+            {
+                Console.Write("An error occured. Check your spelling and try again. ");
+                Console.ReadLine();
             }
         }
 
