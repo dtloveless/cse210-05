@@ -1,7 +1,7 @@
 /***********************************************************************************
 * Scripture Memorizer
 * by Daniel Loveless
-* for CSE 210-05 @ BYU-Idaho Winter 2026
+* for CSE 210-05 @ BYU-Idaho, Winter 2026
 *
 * This program assists the user in memorizing a specified scripture by hiding 
 * words several at a time for the user to recite until the scripture is completely
